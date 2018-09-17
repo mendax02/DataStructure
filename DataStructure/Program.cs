@@ -70,6 +70,16 @@ namespace DataStructure
                 this.next.RemoveFromTheEnd();
             }
         }
+        //public void RemoveAtTheGivenIndex(int index)
+        //{
+        //    int count = 0;
+        //    while (count != index)
+        //    {
+        //        Node temp = this.next;
+        //        count++;
+        //    }
+
+        //}
 
 
     }
@@ -154,14 +164,55 @@ namespace DataStructure
                 headNode = temp;
             }
         }
+
         public void Print()
         {
             if (headNode != null)
             {
-                headNode.PrintList();
+                this.headNode.PrintList();
             }
         }
+
+        public void RemoveAtTheGivenIndex(int index)
+        {
+            // short-circuits
+            if (headNode == null)
+            {
+                Console.WriteLine("Invalid Node Index");
+                return;
+            }
+            else if (index == 0 && headNode.next != null)
+            {
+                RemoveFromTheBegining();
+                return;
+            }
+
+            int count = 0;
+            Node current = this.headNode;
+            Node prev = null;
+            while (count < index && current != null)
+            {
+                prev = current;
+                current = current.next;
+                count++;
+            }
+            if (current != null) // could be removed as it will always be true
+            {
+                if (prev == null)
+                {
+                    this.headNode = current.next;
+                }
+                else
+                {
+                    prev.next = current.next;
+                    current = null;
+                }
+                current = null;
+            }
+
+        }
     }
+
     class Program
     {
         static void Main(string[] args)
@@ -182,21 +233,23 @@ namespace DataStructure
 
             //mList.Print();
 
-            mList.AddSorted(4);
-            mList.AddSorted(131);
-            mList.AddSorted(11);
-            mList.AddSorted(133);
-            mList.AddSorted(11);
+            mList.AddToEndOfMyList(4);
+            mList.AddToEndOfMyList(131);
+            mList.AddToEndOfMyList(11);
+            mList.AddToEndOfMyList(133);
+            // mList.AddSorted(11);
+            //mList.Print();
+            //mList.RemoveFromTheEnd();
+            //mList.Print();
+            //mList.RemoveFromTheEnd();
+            //mList.Print();
+            //mList.RemoveFromTheEnd();
+            //mList.RemoveFromTheEnd();
+            //mList.RemoveFromTheEnd();
             mList.Print();
-            mList.RemoveFromTheEnd();
+            // mList.RemoveFromTheEnd();
+            mList.RemoveAtTheGivenIndex(2);
             mList.Print();
-            mList.RemoveFromTheEnd();
-            mList.Print();
-            mList.RemoveFromTheEnd();
-            mList.RemoveFromTheEnd();
-            mList.RemoveFromTheEnd();
-            mList.Print();
-            mList.RemoveFromTheEnd();
             Console.ReadLine();
 
             //Arrays arrObj = new Arrays();
